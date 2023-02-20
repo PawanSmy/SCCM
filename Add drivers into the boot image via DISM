@@ -1,0 +1,20 @@
+Create the following folders on the root of the C drive:
+C:\Mount
+C:\Mount\Drivers
+C:\Mount\BootWIM
+
+Command to create folders 
+MkDir "C:\Mount" "C:\Mount\Drivers" "C:\Mount\BootWIM"
+
+
+Copy the Drivers you wish to inject into the C:\Mount\Drivers folder
+Copy the boot.wim file to the C:\Mount folder.
+
+DISM commands to mount boot.wim
+DISM /Mount-Wim /WimFile:C:\Mount\boot.wim /Index:1 /MountDir:C:\Mount\BootWIM
+
+Use the following DISM command to add the driver(s):
+DISM /Image:C:\Mount\BootWIM /Add-Driver /Driver:C:\Mount\Drivers /recurse
+
+Use the following DISM command to unmount the Boot.wim:
+DISM /Unmount-Wim /MountDir:C:\Mount\BootWIM /Commit
